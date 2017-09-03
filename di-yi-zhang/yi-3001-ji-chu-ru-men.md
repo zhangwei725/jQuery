@@ -69,32 +69,33 @@
 
 1. 1.x
 
-   ```
-   	自jQuery 1.0 发布以来，已经过多次更新，其中增加了许多新的属性和方法，同时也移除了少数过时的属性和方法。目前最新的 1.x 版本为 1.12.4。
-   ```
+   > 自jQuery 1.0 发布以来，已经过多次更新，其中增加了许多新的属性和方法，同时也移除了少数过时的属性和方法。目前最新的 1.x 版本为 1.12.4。
 
 2. 2.x (支持IE9以及IE9+)
 
-   ```
-   	jQuery还有 2.x 版本(当前最新版本为 2.2.4)，它的API与 1.x 相同，但jQuery 2.x 不再支持IE 6 ~ IE 8。如果你希望兼容IE 6 ~ IE 8，推荐使用 1.x。
-   ```
+   > jQuery还有 2.x 版本(当前最新版本为 2.2.4)，它的API与 1.x 相同，但jQuery 2.x 不再支持IE 6 ~ IE 8。如果你希望兼容IE 6 ~ IE 8，推荐使用 1.x。
 
 3. 3.x版本  (不在支持 ie9)
 
-   ```
-   3.1 桌面浏览器
-   	Chrome: (Current - 1) and Current
-   	Edge: (Current - 1) and Current
-   	Firefox: (Current - 1) and Current
-   	Internet Explorer: 9+
-   	Safari: (Current - 1) and Current
-   	Opera: Current
-   3.2 移动端
-   	Stock browser on Android 4.0+
-   	Safari on iOS 7+
-   ```
+   > 3.1 桌面浏览器
+   >
+   > Chrome: (Current - 1) and Current
+   > Edge: (Current - 1) and Current
+   > Firefox: (Current - 1) and Current
+   > Internet Explorer: 9+
+   > Safari: (Current - 1) and Current
+   > Opera: Current
+   >
+   > 3.2 移动端
+   >
+   > Stock browser on Android 4.0+
+   > Safari on iOS 7+
+   >
+   > ​
 
-4. 一般建议使用最新版本的jQuery。如果你需要使用某个已经被移除的属性或方法，你可以使用包含该属性或方法的jQuery版本
+4. 一般建议
+
+   > 使用最新版本的jQuery。如果你需要使用某个已经被移除的属性或方法，你可以使用包含该属性或方法的jQuery版本
 
 ### 五、ready() 函数(准备就绪时执行代码)
 
@@ -124,17 +125,17 @@
 
 3. onload和JQuery中ready方法的区别
 
-   ```
-   1. 执行时机：onload事件必须等页面完全加载完毕后才能执行；ready当页面节点加载完毕后就可以执行。比onload要早一点
-   2. 添加个数：onload事件只能添加一个，如果添加了多个，则最后执行的onload事件会覆盖前边的事件;ready事件可以添加多个，且互相之间不会覆盖。（onload事件和ready时间之间也不会互相覆盖）
-   3. 简化写法：onload没有简化写法；ready事件可以简化为:$(function(){});
-   ```
+   > - 执行时机：onload事件必须等页面完全加载完毕后才能执行；ready当页面节点加载完毕后就可以执行。比onload要早一点
+   > - 添加个数：onload事件只能添加一个，如果添加了多个，则最后执行的onload事件会覆盖前边的事件;ready事件可以添加多个，且互相之间不会覆盖。（onload事件和ready时间之间也不会互相覆盖）
+   > - 简化写法：onload没有简化写法；ready事件可以简化为:$(function(){});
+
+   ​
 
 4. 建议
 
-   ```
-   js文件和内嵌的js代码一般不建议放在<head>标签中，而应该放在内容主体的结束标签</body>之前。从而让浏览器先加载页面内容，然后再加载并解析执行js代码。这样可以让网速较慢的用户能够更快地看到页面的展示内容，提高用户体验。
-   ```
+   > js文件和内嵌的js代码一般不建议放在<head>标签中，而应该放在内容主体的结束标签</body>之前。从而让浏览器先加载页面内容，然后再加载并解析执行js代码。这样可以让网速较慢的用户能够更快地看到页面的展示内容，提高用户体验
+
+   ​
 
 ### 六、jQuery框架核心功能
 
