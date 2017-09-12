@@ -8,5 +8,6 @@
 * [第二章](di-er-zhang.md)
   * [四、DOM属性操作](di-er-zhang/si-3001-dom-shu-xing-cao-zuo.md)
   * 五、DOM文档操作
+  * 六、DOM样式操作
 * 第三章
 
