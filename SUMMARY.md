@@ -6,5 +6,6 @@
   * [二、选择器](di-yi-zhang/er-3001-xuan-ze-qi.md)
   * [三、DOM操作原则](di-yi-zhang/san.md)
 * [第二章](di-er-zhang.md)
+  * 四、DOM属性操作
 * 第三章
 
