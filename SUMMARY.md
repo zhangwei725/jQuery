@@ -8,7 +8,7 @@
 * [第二章](di-er-zhang.md)
   * [四、DOM属性操作](di-er-zhang/si-3001-dom-shu-xing-cao-zuo.md)
   * [五、DOM文档操作](di-er-zhang/wu-3001-dom-wen-dang-cao-zuo.md)
-  * 六、DOM样式操作
+  * [六、DOM样式操作](di-er-zhang/liu-3001-dom-yang-shi-cao-zuo.md)
   * 七、表单操作
 * [第三章](di-san-zhang.md)
   * 八、AJAX
