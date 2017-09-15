@@ -12,6 +12,6 @@
   * [七、表单操作](di-er-zhang/qi-3001-biao-dan-cao-zuo.md)
 * [第三章](di-san-zhang.md)
   * 八、AJAX
-  * 九、动画效果
+  * [九、动画效果](di-san-zhang/jiu-3001-dong-hua-xiao-guo.md)
   * [十、事件](di-san-zhang/shi-3001-shi-jian.md)
 
