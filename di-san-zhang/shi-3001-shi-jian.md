@@ -2,7 +2,7 @@
 
 ## 一、事件API
 
->  jQuery对象的核心事件方法，核心事件函数，主要用于为元素的任意事件(包括自定义事件)添加、取消、触发绑定的一个或多个事件处理函数
+> jQuery对象的核心事件方法，核心事件函数，主要用于为元素的任意事件(包括自定义事件)添加、取消、触发绑定的一个或多个事件处理函数
 
 ## 二、on()方法(首选方法)
 
@@ -91,7 +91,7 @@
 
 ### 1、说明
 
->  当鼠标指针从元素上移开时，发生`mouseout`事件。该事件大多数时候会与`mouseover`事件一起使用。
+> 当鼠标指针从元素上移开时，发生`mouseout`事件。该事件大多数时候会与`mouseover`事件一起使用。
 
 ### 2、语法
 
@@ -132,72 +132,69 @@
 1. `data`：fn处理函数的参数或数据。
 2. `fn`：在每一个匹配元素的submit事件中绑定的处理函数。
 
+## 十、示例代码
+
+```
+给p元素添加单击事件
+$("p").on("click",function(){
+alert("");
+});
+$("p").on({
+  click:function{
+  }
+  dblclick:function{	
+  }
+});
+
+给a元素添加hover事件
+$("a").hover(
+  function () {
+    $(this).addClass("hover");
+  },
+  function () {
+    $(this).removeClass("hover");
+  }
+);    
 
 
-1. 示例代码
+/*用于绑定两个或多个事件处理器函数，以响应被选元素的轮流的click事件。如果元素是可见的，切换为隐藏的；如果元素是隐藏的，切换为可见的*/
+$("li").toggle(
+  function () {
+    $(this).addClass("visibled");
+  },
+  function () {
+    $(this).removeClass("visibled");
+  }
+);  
+	
+$(selector).change(function(){
+	
+});      	
+	
+$("btn").click(function(){
+	
+});
 
-   ```
-   给p元素添加单击事件
-   $("p").on("click",function(){
-   alert("");
-   });
-   $("p").on({
-     click:function{
-     }
-     dblclick:function{	
-     }
-   });
+$("a").mouseout(function(){
+  $(this).css("color","#ffaaaa");
+});  
 
-   给a元素添加hover事件
-   $("a").hover(
-     function () {
-       $(this).addClass("hover");
-     },
-     function () {
-       $(this).removeClass("hover");
-     }
-   );    
+$("a").mouseover(function(){
+  $(this).css("color","red");
+});   
 
-
-   /*用于绑定两个或多个事件处理器函数，以响应被选元素的轮流的click事件。如果元素是可见的，切换为隐藏的；如果元素是隐藏的，切换为可见的*/
-   $("li").toggle(
-     function () {
-       $(this).addClass("visibled");
-     },
-     function () {
-       $(this).removeClass("visibled");
-     }
-   );  
-   	
-   $(selector).change(function(){
-   	
-   });      	
-   	
-   $("btn").click(function(){
-   	
-   });
-
-   $("a").mouseout(function(){
-     $(this).css("color","#ffaaaa");
-   });  
-
-   $("a").mouseover(function(){
-     $(this).css("color","red");
-   });   
-
-   $(":text").select( function () { /* ...do something... */ } );   
-
-
-
-   $("form").submit( function () {
-     return false;
-   } );  
-
-   ```
+$(":text").select( function () { /* ...do something... */ } );   
 
 
 
-1. 其它时间
+$("form").submit( function () {
+  return false;
+} );  
+```
+
+## 十一、其它事件
+
+1. 元素事件
 
    | 方法               | 版本          | 描述                                     |
    | ---------------- | ----------- | -------------------------------------- |
