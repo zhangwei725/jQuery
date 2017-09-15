@@ -145,10 +145,10 @@
 ## 八、jQuery 名称冲突
 
 1. jQuery 使用 $ 符号作为 jQuery 的简介方式。
-2. 
 2. 某些其他 JavaScript 库中的函数（比如 Prototype）同样使用 $ 符号。
+3. jQuery 使用名为 noConflict\(\) 的方法来解决该问题。_var jq=jQuery.noConflict\(\)_，帮助您使用自己的名称（比如 jq）来代替 $ 符号
 
-jQuery 使用名为 noConflict\(\) 的方法来解决该问题。
 
-_var jq=jQuery.noConflict\(\)_，帮助您使用自己的名称（比如 jq）来代替 $ 符号
+
+
 
