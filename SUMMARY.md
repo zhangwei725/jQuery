@@ -11,7 +11,7 @@
   * [六、DOM样式操作](di-er-zhang/liu-3001-dom-yang-shi-cao-zuo.md)
   * [七、表单操作](di-er-zhang/qi-3001-biao-dan-cao-zuo.md)
 * [第三章](di-san-zhang.md)
-  * 八、AJAX
+  * [八、AJAX](di-san-zhang/ba-3001-ajax.md)
   * [九、动画效果](di-san-zhang/jiu-3001-dong-hua-xiao-guo.md)
   * [十、事件](di-san-zhang/shi-3001-shi-jian.md)
 
