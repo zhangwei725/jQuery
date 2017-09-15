@@ -142,7 +142,7 @@
 2. jQuery对象与dom对象之间的转换
 3. jQuery的ready 不等于JavaScript的 load
 
-## jQuery 名称冲突
+## 八、jQuery 名称冲突
 
 jQuery 使用 $ 符号作为 jQuery 的简介方式。
 
@@ -151,6 +151,4 @@ jQuery 使用 $ 符号作为 jQuery 的简介方式。
 jQuery 使用名为 noConflict\(\) 的方法来解决该问题。
 
 _var jq=jQuery.noConflict\(\)_，帮助您使用自己的名称（比如 jq）来代替 $ 符号
-
-
 
