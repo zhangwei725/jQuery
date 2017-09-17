@@ -55,80 +55,64 @@
 1. get请求
 
    ```
+      // 将url单独提取出来作为第一个参数(jQuery 1.5+才支持)
+      $.ajax("/login?name=haha&pwd=123, {
+           dataType: "json" , // 返回JSON格式的数据
+           success: function( data, textStatus, jqXHR ){
+              // jQuery已帮我们将该JSON字符串转换为对应的JS对象，可以直接使用
+              alert( data.name ); // CodePlayer
+          }   
+      });
 
+      $.ajax( {
+          // 注意这里有个参数callback=?
+           url: "name=hehe&age=21&callback=?",
+           async: false // 同步请求，发送请求后浏览器将被锁定，只有等到该请求完成(无论成功或失败)后，用户才能操作，js代码才会继续执行
+          , dataType: "jsonp" // 返回JSON格式的数据
+          , success: function( data, textStatus, jqXHR ){
+              alert( data.state );
+          }   
+      });
+      $.ajax( {
+          // 加载指定的js文件到当前文档中
+            url: "http://code.jquery.com/jquery-1.8.3.min.js", 
+          dataType: "script"
+      });
    ```
 
-   // 将url单独提取出来作为第一个参数(jQuery 1.5+才支持)
-   $.ajax("/login?name=haha&pwd=123, {
-
-```
-    dataType: "json" , // 返回JSON格式的数据
-    success: function( data, textStatus, jqXHR ){
-       // jQuery已帮我们将该JSON字符串转换为对应的JS对象，可以直接使用
-       alert( data.name ); // CodePlayer
-   }   
-```
-
-   });
-
-   $.ajax( {
-
-```
-   // 注意这里有个参数callback=?
-    url: "name=hehe&age=21&callback=?",
-    async: false // 同步请求，发送请求后浏览器将被锁定，只有等到该请求完成(无论成功或失败)后，用户才能操作，js代码才会继续执行
-   , dataType: "jsonp" // 返回JSON格式的数据
-   , success: function( data, textStatus, jqXHR ){
-       alert( data.state );
-   }   
-```
-
-   });
-   $.ajax( {
-
-```
-   // 加载指定的js文件到当前文档中
-     url: "http://code.jquery.com/jquery-1.8.3.min.js", 
-   dataType: "script"
-```
-
-   });
-
-```
 2. post请求
-```
 
-```
- $.ajax({
-               url: "/account/login",
-               type: "post",
-               data: "name=zw&age=18",
-               success: function (data, textStatus, jqXHR) {
-                   // data 是返回的数据
-                   // textStatus 可能为"success"、"notmodified"等
-                   // jqXHR 是经过jQuery封装的XMLHttpRequest对象
-                   alert("返回的数据" + data);
-               }
-           });
-
-           $.ajax({
-               url: "/shop?page=1&id=3",
-               type: "post",
-               //等价于"uid=1&name=zw&age=18"
-               data: {uid: 1, name: "zw", age: 18},
-               // 请求成功时执行
-               success: function (data, textStatus, jqXHR) {
-                   alert("返回的数据" + data);
-               },
-               // 请求失败时执行
-               error: function (jqXHR, textStatus, errorMsg) {
-                   // jqXHR 是经过jQuery封装的XMLHttpRequest对象
-                   // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
-                   // errorMsg 可能为： "Not Found"、"Internal Server Error"等
-                   alert("请求失败：" + errorMsg);
-               }
-           });
-```
+   ```
+     $.ajax({
+                   url: "/account/login",
+                   type: "post",
+                   data: "name=zw&age=18",
+                   success: function (data, textStatus, jqXHR) {
+                       // data 是返回的数据
+                       // textStatus 可能为"success"、"notmodified"等
+                       // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                       alert("返回的数据" + data);
+                   }
+               });
+    
+               $.ajax({
+                   url: "/shop?page=1&id=3",
+                   type: "post",
+                   //等价于"uid=1&name=zw&age=18"
+                   data: {uid: 1, name: "zw", age: 18},
+                   // 请求成功时执行
+                   success: function (data, textStatus, jqXHR) {
+                       alert("返回的数据" + data);
+                   },
+                   // 请求失败时执行
+                   error: function (jqXHR, textStatus, errorMsg) {
+                       // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                       // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                       // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                       alert("请求失败：" + errorMsg);
+                   }
+               });
+   ```
 
 ### 2、get()
 
@@ -382,11 +366,12 @@
     $(function () {
    	$("#load").load("data.html");
    });
+   ```
 
-
+   ```
     $(function () {
-   	$("#load").load("data.html");
-   });
+    	$("#load").load("data.html");
+       });
 
    $(function () {
         //使用其中id为#content的内容添加到id为#load的子元素
@@ -404,7 +389,7 @@
 >
 > 该函数不会序列化不需要提交的表单控件，这和常规的表单提交行为是一致的。
 >
-> 1. 不在<form>标签内的表单控件不会被提交、
+> 1. 不在\<form>标签内的表单控件不会被提交、
 > 2. 没有name属性的表单控件不会被提交、
 > 3. 带有disabled属性的表单控件不会被提交、
 > 4. 没有被选中的表单控件不会被提交
@@ -427,7 +412,7 @@
                    console.log($("#form_id").serialize());
                });
            });
-           
+
    <form id="form_id" >
        <input name="uid" type="hidden" value="1"/>
        <input name="username" type="text" value="傻根"/>
@@ -447,7 +432,6 @@
        <input name="star" type="checkbox" value="3"/>苍井空
        <input name="star" type="checkbox" value="4"/>小明
        <input name="btn" id="btn" type="button" value="提交"/>
-           
    ```
 
 2. 提交部分数据
@@ -455,15 +439,14 @@
    ```
     $(function () {
                $("#btn").click( function(){
-
-                   // 将当前表单内容以POST请求的AJAX方式提交到"http://www.365mini.com"
+    
                    $.post( "/register" ,$( $(":text, select, :checkbox").serialize()).serialize(),
                        function( data, textStatus, jqXHR ){
                        alert( "AJAX提交成功!" );
                    });
-
+    
                } );
-
+    
            });
    ```
 
@@ -493,7 +476,6 @@
 1. 将form表单的内容转化成数组
 
    ```
-           
    <form id="form_id" >
        <input name="uid" type="hidden" value="1"/>
        <input name="username" type="text" value="傻根"/>
@@ -513,7 +495,6 @@
        <input name="star" type="checkbox" value="3"/>苍井空
        <input name="star" type="checkbox" value="4"/>小明
        <input name="btn" id="btn" type="button" value="提交"/>
-           
    ```
 
 2. 提交部分数据
@@ -536,9 +517,9 @@
                        function( data, textStatus, jqXHR ){
                        alert( "AJAX提交成功!" );
                    });
-
+    
                } );
-
+    
            }); 
    ```
 
@@ -657,7 +638,6 @@
    >
    > 它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制
 
-2. ​
 
 #### 3.3、代理请求方式(了解)
 
@@ -666,8 +646,6 @@
 > 1. JSONP只能实现GET请求，而CORS支持所有类型的HTTP请求。  
 > 2. 使用CORS，开发者可以使用普通的XMLHttpRequest发起请求和获得数据，比起JSONP有更好的错误处理。  
 > 3. JSONP主要被老的浏览器支持，它们往往不支持CORS，而绝大多数现代浏览器都已经支持了CORS
-
-
 
 跨域问题常见的错误
 
@@ -695,7 +673,6 @@
    No 'Access-Control-Allow-Origin' header is present on the requested resource,
    status 200
    ```
-
    2、 解决方案
 
    ```
