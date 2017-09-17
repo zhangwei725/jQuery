@@ -1,5 +1,3 @@
- 
-
 # Ajax
 
 # 一、什么是Ajax
@@ -92,34 +90,34 @@
 
    1、readyState状态信息
 
-   > | 状态码  |      说明      |
-   > | :--: | :----------: |
-   > |  0   |    请求未初始化    |
-   > |  1   |   服务器连接已建立   |
-   > |  2   |    请求已接收     |
-   > |  3   |    请求处理中     |
-   > |  4   | 请求已完成，且响应已就绪 |
+   > | 状态码 | 说明 |
+   > | :---: | :---: |
+   > | 0 | 请求未初始化 |
+   > | 1 | 服务器连接已建立 |
+   > | 2 | 请求已接收 |
+   > | 3 | 请求处理中 |
+   > | 4 | 请求已完成，且响应已就绪 |
 
    2、 responseText 作为响应主体被返回的文本
 
-​	responseText属性返回从服务器接收到的字符串，该属性为只读。如果本次请求没有成功或者数据不完整，该属性就会等于null。如果服务器返回的数据格式是JSON，就可以使用responseText属性。
+​    responseText属性返回从服务器接收到的字符串，该属性为只读。如果本次请求没有成功或者数据不完整，该属性就会等于null。如果服务器返回的数据格式是JSON，就可以使用responseText属性。
 
-​	var data = ajax.responseText;
-​	data = JSON.parse(data);
+​    var data = ajax.responseText;  
+​    data = JSON.parse\(data\);
 
-   4、statusText 响应HTTP状态
+4、statusText 响应HTTP状态
 
-> | 状态码  |    说明    |
-> | :--: | :------: |
-> | 200  | 服务器正常响应  |
-> | 400  |  错误的请求   |
-> | 403  |  没有访问权限  |
-> | 404  | 请求的资源不存在 |
-> | 500  | 服务器内部错误  |
+> | 状态码 | 说明 |
+> | :---: | :---: |
+> | 200 | 服务器正常响应 |
+> | 400 | 错误的请求 |
+> | 403 | 没有访问权限 |
+> | 404 | 请求的资源不存在 |
+> | 500 | 服务器内部错误 |
 
 ### 3、初始化对象
 
-1. 通过XMLHttpRequest对象的open()方法，传入参数完成初始化XMLHttpRequest对象的工作
+1. 通过XMLHttpRequest对象的open\(\)方法，传入参数完成初始化XMLHttpRequest对象的工作
 
    ```
    xhr.open('GET','url');
@@ -128,15 +126,15 @@
 
 2. 说明
 
-   - method	
+   * method
 
      Http请求方式，选择发送Http get 请求，因此参数为get，支持get跟post请求
 
-   - url
+   * url
 
      要请求服务器的url路径
 
-   - async
+   * async
 
      是否以异步的方式发送，true为异步，false为同步，默认为true
 
@@ -185,17 +183,17 @@
 
 #### 2、参数
 
-> 1、void send();
+> 1、void send\(\);
 >
-> 2、void send(String data);
+> 2、void send\(String data\);
 >
-> 3、void send(FormData data);
+> 3、void send\(FormData data\);
 >
-> 4、void send(ArrayBufferView data);
+> 4、void send\(ArrayBufferView data\);
 >
-> 5、void send(Blob data);
+> 5、void send\(Blob data\);
 >
-> 6、void send(Document data);
+> 6、void send\(Document data\);
 
 #### 3、参数详解
 
@@ -219,7 +217,7 @@
           <input type='text' name='username' value='张三'>
           <input type='email' name='email' value='zhangsan@163.com'>
           <input type='submit'>
-      </form>   
+      </form>
    ```
 
 2. 现有表单构造生成
@@ -248,26 +246,24 @@
       sendForm(form);
    ```
 
-4.  FormData对象也能用来模拟File控件，进行文件上传。
+4. FormData对象也能用来模拟File控件，进行文件上传。
 
    ```
    function uploadFiles(url, files) {
-        var formData = new FormData();
-        for (var i = 0, file; file = files[i]; ++i) {
-          formData.append(file.name, file); // 可加入第三个参数，表示文件名
-        }
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', url, true);
-        xhr.onload = function(e) { ... };
-        xhr.send(formData);  // multipart/form-data
-      }
-      document.querySelector('input[type="file"]').change(function() {
-        uploadFiles('/upload', this.files);
-        return false;
-      });
+       var formData = new FormData();
+       for (var i = 0, file; file = files[i]; ++i) {
+         formData.append(file.name, file); // 可加入第三个参数，表示文件名
+       }
+       var xhr = new XMLHttpRequest();
+       xhr.open('POST', url, true);
+       xhr.onload = function(e) { ... };
+       xhr.send(formData);  // multipart/form-data
+     }
+     document.querySelector('input[type="file"]').change(function() {
+       uploadFiles('/upload', this.files);
+       return false;
+     });
    ```
-
-
 
 ##### 2、String
 
@@ -302,18 +298,6 @@
    ```
 
    ​
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
