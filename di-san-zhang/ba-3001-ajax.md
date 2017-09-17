@@ -1,303 +1,207 @@
-# Ajax
+## jQuery之Ajax
 
-# 一、什么是Ajax
+### 一、什么是 AJAX？
 
-> AJAX = 异步 JavaScript 和 XML。
->
-> AJAX 是一种用于创建快速动态网页的技术。
->
-> 通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
->
-> 传统的网页（不使用 AJAX）如果需要更新内容，必需重载整个网页面
+```
+AJAX = 异步 JavaScript 和 XML（Asynchronous JavaScript and XML）。
 
-# 二、Ajax的原生写法
+简短地说，在不重载整个网页的情况下，AJAX 通过后台加载数据，并在网页上进行显示。
 
-### 1、XMLHttpRequest对象
+使用 AJAX 的应用程序案例：谷歌地图、腾讯微博、优酷视频、人人网等等。
+```
 
-> XMLHttpRequest 对象用于在后台与服务器交换数据，能够在不重新加载页面的情况下更新网页，在页面已加载后从服务器请求数据，在页面已加载后从服务器接收数据，在后台向服务器发送数据。所以**XMLHttpRequest对象是Ajax技术的核心所在**
+### 二、 方法总结
 
-### 2、 执行步骤
+#### 1 、发送并处理AJAX请求的方法
 
-1. 流程图
+| 方法            | 版本   | 描述                                       |
+| ------------- | ---- | ---------------------------------------- |
+| $.ajax()      | 1.0  | 全局方法发送并处理AJAX请求。这是jQuery底层的AJAX实现，包含处理AJAX请求所需的一切功能。其他发送AJAX请求的方法都是对该方法的进一步封装。 |
+| $.get()       | 1.0  | 全局方法发送并处理GET方式的AJAX请求。                   |
+| $.post()      | 1.0  | 全局方法发送并处理POST方式的AJAX请求。                  |
+| $.getJSON()   | 1.0  | 全局方法发送并处理GET方式、返回数据为JSON格式的AJAX请求。       |
+| $.getScript() | 1.0  | 全局方法发送GET请求，用于加载一个JS脚本文件。                |
+| $.load()      | 1.0  | 全局方法发送AJAX请求，用于加载一个HTML文件并替换匹配元素中的内容。    |
 
-   ![](http://opzv089nq.bkt.clouddn.com/17-9-4/73927704.jpg)
+#### 2 、辅助函数-发送或处理AJAX请求，简化AJAX操作
 
-2. 工作流程
+| 方法                     | 版本   | 描述                                       |
+| ---------------------- | ---- | ---------------------------------------- |
+| jQuery.ajaxPrefilter() | 1.5  | 全局方法在$.ajax()处理参数选项之前，预处理参数选项。           |
+| jQuery.ajaxSetup()     | 1.1  | 全局方法设置$.ajax()的全局默认选项。                   |
+| jQuery.param()         | 1.0  | 全局方法将JS数组或对象序列化为字符串，以便用于URL查询字符串或AJAX请求。 |
+| serialize()            | 1.0  | 将表单元素序列化为字符串，以便用于URL查询字符串或AJAX请求。        |
+| serializeArray()       | 1.2  | 将表单元素序列化为一个JS数组。                         |
 
-   > 1、创建兼容性XHR对象 → 2、初始化请求 →3 、发送请求 → 4、接收数据 → 5、解析数据 → 6、完成
+#### 3 、事件方法-用于为AJAX事件绑定处理一个或多个函数
 
-## 三、流程详解
+| ajaxComplete() | 1.0  | 设置当AJAX请求完成(无论成功或失败)时执行的处理函数。 |
+| -------------- | ---- | ----------------------------- |
+| ajaxSuccess()  | 1.0  | 设置当AJAX请求成功时执行的处理函数。          |
+| ajaxError()    | 1.0  | 设置当AJAX请求失败时执行的处理函数。          |
+| ajaxStart()    | 1.0  | 设置当前第一个AJAX请求开始时执行的处理函数。      |
+| ajaxSend()     | 1.0  | 设置在AJAX请求被发送前执行的处理函数。         |
+| ajaxStop()     | 1.0  | 设置当前最后一个AJAX请求结束时执行的处理函数      |
 
-### 1、创建兼容性XHR对象
+### 三、Ajax使用
 
-1. XMLHttpRequest对象兼容IE7+，Chrome，FireFox等浏览器。如果不需要兼容IE7以下版本的浏览器，直接使用XMLHttpRequest构造函数即可
+#### 5.2.1、 load() 方法
+
+
+
+
+
+#### 5.2.2、  ajax方法
+
+1. 完整格式:
 
    ```
-   var xhr = new XMLHttpRequest();
-   ```
-
-2. 在IE7以下版本的浏览器中对这个对象是采用ActiveX插件的方式来实现的。在IE浏览器中可能会遇到三种不同版本的XHR对象，即MSXML2.XMLHttp,MSXML2.XMLHttp.3.0,MSXML2.XMLHttp.6.0，要使用MSXML库中的XHR对象的话
-
-   ```
-   var xhr = new ActiveXObject('Microsoft.XMLHttp');
-   ```
-
-3. 完整代码
-
-   ```
-   function getXHR(){
-       var xhr = null;
-       try{
-           xhr = new XMLHttpRequest();
-       }catch(e){
-           xhr = new ActiveXObject('Microsoft.XMLHttp');
+   $.ajax({
+   	//ajax请求地址
+       url: "home?method=catedata",  
+       //(默认: true,dataType为script和jsonp时默认为false)设置为 false 将不缓存此页面，建议使用默认
+       cache: false,
+       //请求方式 "POST" 或 "GET"， 默认为 "GET"。注意：其它 HTTP 请求方法，如 PUT 和 DELETE 也可以使用，但仅部分浏览器支持。
+       type:"GET",
+       dataType:"json",    //根据返回数据类型可以有这些类型可选：xml html script json jsonp text
+       //发送到服务器的数据，可以直接传对象{a:0,b:1}，如果是get请求会自动拼接到url后面，如：&a=0&b=1
+       //如果为数组，jQuery 将自动为不同值对应同一个名称。如 {key:["value1", "value2"]} 转换为 "&key=value1&key=value2"。
+       data:{},
+       //发送请求前可修改 XMLHttpRequest 对象的函数，如添加自定义 HTTP 头。XMLHttpRequest 对象是唯一的参数。这是一个 Ajax 事件。如果返回false可以取消本次ajax请求。
+       beforeSend:function(xhr){
+           //this 默认为调用本次AJAX请求时传递的options参数
+       },
+       //context这个对象用于设置ajax相关回调函数的上下文。也就是说，让回调函数内this指向这个对象（如果不设定这个参数，那么this就指向调用本次AJAX请求时传递的options参数）。
+       //比如指定一个DOM元素作为context参数，这样就设置了success回调函数的上下文为这个DOM元素。
+       context: document.body,
+       //请求成功后的回调函数
+       success: function(data,textStatus){
+           //this 调用本次AJAX请求时传递的options参数 ,如果设置context来改变了this，那这里的this就是改变过的
+       },
+       //请求失败时调用此函数。有以下三个参数：XMLHttpRequest 对象、错误信息、（可选）捕获的异常对象。
+       //如果发生了错误，错误信息（第二个参数）除了得到null之外，还可能是"timeout", "error", "notmodified" 和 "parsererror"。
+       error：function(XMLHttpRequest, textStatus, errorThrown){
+           // 通常 textStatus 和 errorThrown 之中
+           // 只有一个会包含信息
+           // this 调用本次AJAX请求时传递的options参数
+       },
+       //请求完成后回调函数 (请求成功或失败之后均调用)。参数： XMLHttpRequest 对象和一个描述成功请求类型的字符串
+       complete:function(XMLHttpRequest, textStatus) {
+           //this 调用本次AJAX请求时传递的options参数
+       },
+       //一组数值的HTTP代码和函数对象，当响应时调用了相应的代码。例如，如果响应状态是404，将触发以下警报：
+       statusCode:{
+           404:function(){
+               alert('404，页面不存在');
+           }
        }
-       return XHR;
-   }
+   });
    ```
 
-### 2、设置回调函数
-
-1. 通过XMLHttpRequest对象的onreadystatechange属性设置回调函数，用于当请求成功后接收服务器端返回的数据
+2. 常用格式
 
    ```
-   xhr.onreadystatechange=function()
-           case 0 :
-               //alert("请求未初始化");
-               break; 
-           case 1 :
-               //alert("请求启动，尚未发送");
-               break;
-           case 2 :
-               //alert("请求发送，尚未得到响应");
-               break;
-           case 3 : 
-               //alert("请求开始响应，收到部分数据");
-               break;
-           case 4 :
-               alert("请求响应完成得到全部数据");
-               if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                   var  data = xhr.responseText;
-                   alert(data);
-               }else {
-                   alert("Request was unsuccessful : " + xhr.status + " " + xhr.statusText);
-               }
-               break;
-     }
+   $.ajax({
+        type: 'POST',
+        url: url ,
+        data: data ,
+        success: success ,
+        dataType: dataType
+   });
    ```
 
-2. 常用的属性说明
-
-   1、readyState状态信息
-
-   > | 状态码 | 说明 |
-   > | :---: | :---: |
-   > | 0 | 请求未初始化 |
-   > | 1 | 服务器连接已建立 |
-   > | 2 | 请求已接收 |
-   > | 3 | 请求处理中 |
-   > | 4 | 请求已完成，且响应已就绪 |
-
-   2、 responseText 作为响应主体被返回的文本
-
-​    responseText属性返回从服务器接收到的字符串，该属性为只读。如果本次请求没有成功或者数据不完整，该属性就会等于null。如果服务器返回的数据格式是JSON，就可以使用responseText属性。
-
-​    var data = ajax.responseText;  
-​    data = JSON.parse\(data\);
-
-4、statusText 响应HTTP状态
-
-> | 状态码 | 说明 |
-> | :---: | :---: |
-> | 200 | 服务器正常响应 |
-> | 400 | 错误的请求 |
-> | 403 | 没有访问权限 |
-> | 404 | 请求的资源不存在 |
-> | 500 | 服务器内部错误 |
-
-### 3、初始化对象
-
-1. 通过XMLHttpRequest对象的open\(\)方法，传入参数完成初始化XMLHttpRequest对象的工作
+3. 示例代码
 
    ```
-   xhr.open('GET','url');
-   xhr.open('POST','url');
+     $.ajax({
+         type: "GET",
+         url: cate_data_url,
+         dataType: 'json',
+         success: function (data) {
+         init_cate(data)
+         }
+
+       });
+   		
+   	function init_cate(data) {
+             //操作数据      
+   	}
    ```
 
-2. 说明
+#### 5.2.3、 get() 方法
 
-   * method
 
-     Http请求方式，选择发送Http get 请求，因此参数为get，支持get跟post请求
 
-   * url
+#### 5.2.4、 post() 方法
 
-     要请求服务器的url路径
-
-   * async
-
-     是否以异步的方式发送，true为异步，false为同步，默认为true
-
-     同步：会停留并等待服务器发送回复然后再继续
-
-     ```
-       /* 开发中不要使用同步 */
-         var xhr = new XMLHttpRequest();
-         console.log("1、实例化");
-         xhr.onreadystatechange = function () {
-             if (xhr.readyState === 4 && xhr.status === 200) {
-                 console.log("4、请求数据完成");
-                 console.log(this.responseText);
-             }
-         };
-         console.log("2、监听设置完成");
-         xhr.open("GET", "/web/ajax", false);
-         console.log("3、初始化配置!!!");
-         xhr.send();
-         console.log("5、请求发送完成!!!");
-     ```
-
-     异步：允许页面继续其进程并处理可能的回复
-
-     ```
-        var xhr = new XMLHttpRequest();
-         console.log("1、实例化");
-         xhr.onreadystatechange = function () {
-             if (xhr.readyState === 4 && xhr.status === 200) {
-                 console.log("5、请求数据完成");
-                 console.log(this.responseText);
-             }
-         };
-         console.log("2、监听设置完成");
-         xhr.open("GET", "/web/ajax", true);
-         console.log("3、初始化配置!!!");
-         xhr.send();
-         console.log("4、请求发送完成!!!");
-     ```
-
-### 4、发送请求
-
-#### 1、概要
-
-> send方法用于实际发出HTTP请求。如果不带参数，就表示HTTP请求只包含头信息，也就是只有一个URL，典型例子就是GET请求；如果带有参数，就表示除了头信息，还带有包含具体数据的信息体，典型例子就是POST请求。
-
-#### 2、参数
-
-> 1、void send\(\);
->
-> 2、void send\(String data\);
->
-> 3、void send\(FormData data\);
->
-> 4、void send\(ArrayBufferView data\);
->
-> 5、void send\(Blob data\);
->
-> 6、void send\(Document data\);
-
-#### 3、参数详解
-
-##### 1、FormData
-
-1. 构造表单数据
+1. 常用格式
 
    ```
-   var formData = new FormData();
-   formData.append('username', '张三');
-   formData.append('email', 'zhangsan@163.com');
-   var xhr = new XMLHttpRequest();
-   xhr.open("POST", "/register");
-   xhr.send(formData);
-   ```
-
-   上面的代码构造了一个formData对象，然后使用send方法发送。它的效果与点击下面表单的submit按钮是一样的。
-
-   ```
-   <form id='register' name='register' action='/register'>
-          <input type='text' name='username' value='张三'>
-          <input type='email' name='email' value='zhangsan@163.com'>
-          <input type='submit'>
-      </form>
-   ```
-
-2. 现有表单构造生成
-
-   ```
-   var form = document.querySelector("form");
-   var request = new XMLHttpRequest();
-   request.open("POST", "/rigesiter");
-   request.send(new FormData(form));
-   ```
-
-3. FormData对象还可以对现有表单添加数据
-
-   ```
-   function sendForm(form) {
-          var formData = new FormData(form);
-          var xhr = new XMLHttpRequest();
-          xhr.open('POST', "/rigester", true);
-          xhr.onload = function(e) {
-              // ...
-          };
-          xhr.send(formData);
-          return false;
-      }
-      var form = document.querySelector('#register');
-      sendForm(form);
-   ```
-
-4. FormData对象也能用来模拟File控件，进行文件上传。
-
-   ```
-   function uploadFiles(url, files) {
-       var formData = new FormData();
-       for (var i = 0, file; file = files[i]; ++i) {
-         formData.append(file.name, file); // 可加入第三个参数，表示文件名
+   $.ajax({
+       type: "POST",
+       url: "/home",
+       dataType:'json',//可以不写 框架自己也会判断
+       data: {name:"xiaoming",sex:1},//也可以是字符串链接"name=xiaoming&sex=1"，建议用对象
+       success: function(data){
+           //实际操作的时候，返回的json对象中可能会有成功错误的判断标记，所以可能也需要判断一下
        }
-       var xhr = new XMLHttpRequest();
-       xhr.open('POST', url, true);
-       xhr.onload = function(e) { ... };
-       xhr.send(formData);  // multipart/form-data
-     }
-     document.querySelector('input[type="file"]').change(function() {
-       uploadFiles('/upload', this.files);
-       return false;
-     });
+   });
    ```
 
-##### 2、String
+#### 5.2.5、 getJSON() 方法
 
-1. 传递键值对
+#### 5.2.6、 getScript() 方法
 
-   ```
-   function getData(url) {
-        var formData = new FormData();
-        for (var i = 0, file; file = files[i]; ++i) {
-          formData.append(file.name, file); // 可加入第三个参数，表示文件名
-        }
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', url);
-        xhr.onload = function(e) { ... };
-        xhr.send("uid=1");  //application/x-www-form-urlencoded
-      }
-   ```
+#### 5.2.7、 form表单处理
 
-2. 传递多个键值对
+```
+  $("form").on("submit",function(){
+        var url = this.action;   //可以直接取到表单的action
+        var formData = $(this).serialize();//必须要写
+        $.post(url,formData,
+            function(data){
+                //返回成功，可以做一个其他事情
+            },'json');
+        //阻止表单默认提交行为
+        return false
+    })	
+```
 
-   ```
-   function getData(url) {
-        var formData = new FormData();
-        for (var i = 0, file; file = files[i]; ++i) {
-          formData.append(file.name, file); // 可加入第三个参数，表示文件名
-        }
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', url);
-        xhr.onload = function(e) { ... };
-        xhr.send("page=1&size=10");  //application/x-www-form-urlencoded
-      }
-   ```
+#### 5.2.8、 什么是跨域
 
-   ​
+##### 5.2.7.1、 域名地址的组成：
 
+http:// www . google : 8080 / index.html
 
+　　http:// （协议号）
+
+　　www  （子域名）
+
+　　google （主域名）
+
+　　 8080 （端口号）
+
+　　/index.html （请求的地址）
+
+ 当协议、子域名、主域名、端口号中任意一各不相同时，都算不同的“域”。
+
+不同的域之间相互请求资源，就叫“跨域”。
+
+比如：http://www.werner.com/index.html 请求 http://www.bbbb.com/index.html的数据 
+
+##### 5.2.7.1、为什么不能跨域请求
+
+这是因为基于安全的考虑，AJAX只能访问本地的资源，而不能跨域访问。
+
+比如说你的网站域名是google.com，想要通过AJAX请求yztc.com域名中的内容，浏览器就会认为是不安全的，所以拒绝访问
+
+| 编号   | url                                      | 说明           | 是否允许通信 |
+| ---- | ---------------------------------------- | ------------ | ------ |
+| 1    | http://www.werner.com/index.html                                             http://www.werner.com/home.html | 同一域名下        | 允许     |
+| 2    | http://www.werner.com/index.html                                             http://www.werner.com/admin/home.html | 同一域名不同文件夹    | 允许     |
+| 3    | http://www.werner.com:8090/index.html                                             http://www.werner.com:8080/index.html | 同一域名不同端口号    | 不允许    |
+| 4    | http://www.werner.com:8000/index.html                                             https://www.werner.com:8080/index.html | 同一域名不同协议     | 不允许    |
+| 5    | http://www.werner.com:8090/index.html                                             http://www.werner.com:8080/index.html | 域名与域名对应的ip地址 | 不允许    |
+| 6    | http://mail.werner.com:8090/index.html                                             http://www.werner.com:8080/index.html | 主域名相同，子域名不同  | 不允许    |
+| 7    | http://mail.werner.com:8000/index.html                                             http://www.test.com:8080/index.html | 不同域名         | 不允许    |
 
